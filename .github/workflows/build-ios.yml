@@ -29,13 +29,13 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.47.9' # Versão exata exigida pelo Flet atual
+        flutter-version: '3.47.9'
         channel: 'stable'
         cache: true
 
     - name: Build iOS app with Flet
       run: |
-        flet build ipa --no-interactive --verbose
+        flet build ipa --verbose
 
     - name: Upload iOS artifacts
       uses: actions/upload-artifact@v4
