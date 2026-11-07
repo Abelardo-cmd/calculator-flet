@@ -1,44 +1,44 @@
 name: Build Flet iOS
 
 on:
-  push:
-    branches: [ main ]
+    push:
+        branches: [ main ]
 
 jobs:
-  build:
-    runs-on: macos-latest
+    build:
+        runs-on: macos-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with:
+              python-version: '3.11'
 
-    - name: Install uv and dependencies
-      run: |
-        pip install uv
-        uv sync
+        - name: Install uv and dependencies
+          run: |
+              pip install uv
+              uv sync
 
-    - name: Install Flet CLI
-      run: |
-        pip install flet
+        - name: Install Flet CLI
+          run: |
+              pip install flet
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.22.x' # Versão compatível com o Flet atual
-        channel: 'stable'
-        cache: true
+        - name: Set up Flutter
+          uses: subosito/flutter-action@v2
+          with:
+              flutter-version: '3.22.x'
+              channel: 'stable'
+              cache: true
 
-    - name: Build iOS app with Flet
-      run: |
-        flet build ios --verbose
+        - name: Build iOS app with Flet
+          run: |
+              flet build ipa --verbose
 
-    - name: Upload iOS artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: ios-build-output
-        path: build/ios/
+        - name: Upload iOS artifacts
+          uses: actions/upload-artifact@v4
+          with:
+              name: ios-build-output
+              path: build/ios/
